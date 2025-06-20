@@ -4,13 +4,11 @@ import com.denisson.stokpro.adapters.dto.CustomerRequestDTO;
 import com.denisson.stokpro.adapters.dto.CustomerResponseDTO;
 import com.denisson.stokpro.adapters.mappers.CustomerMapper;
 import com.denisson.stokpro.application.useCases.CreateCustomerUseCase;
+import com.denisson.stokpro.application.useCases.GetAllCustomersUseCase;
 import com.denisson.stokpro.domain.entities.Customer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.denisson.stokpro.adapters.mappers.CustomerMapper.toDomain;
 
@@ -19,9 +17,16 @@ import static com.denisson.stokpro.adapters.mappers.CustomerMapper.toDomain;
 public class CustomerController {
 
     private final CreateCustomerUseCase createCustomerUseCase;
+    private final GetAllCustomersUseCase getAllCustomersUseCase;
 
-    public CustomerController(CreateCustomerUseCase createCustomerUseCase) {
+    public CustomerController(CreateCustomerUseCase createCustomerUseCase, GetAllCustomersUseCase getAllCustomersUseCase) {
         this.createCustomerUseCase = createCustomerUseCase;
+        this.getAllCustomersUseCase = getAllCustomersUseCase;
+    }
+
+    @GetMapping()
+    public ResponseEntity<?> getAll() {
+        return ResponseEntity.ok(CustomerMapper.fromDomainList(getAllCustomersUseCase.execute()));
     }
 
     @PostMapping()

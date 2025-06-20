@@ -2,6 +2,7 @@ package com.denisson.stokpro.conf.di;
 
 import com.denisson.stokpro.application.repositories.ICustomerRepository;
 import com.denisson.stokpro.application.useCases.CreateCustomerUseCase;
+import com.denisson.stokpro.application.useCases.GetAllCustomersUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,6 +17,11 @@ public class CustomerDi {
     @Bean
     public CreateCustomerUseCase createCustomerUseCase() {
         return new CreateCustomerUseCase(repository);
+    }
+
+    @Bean
+    public GetAllCustomersUseCase getAllCustomersUseCase() {
+        return new GetAllCustomersUseCase(repository);
     }
 
 }

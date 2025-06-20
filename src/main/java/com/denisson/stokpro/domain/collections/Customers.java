@@ -12,4 +12,9 @@ public class Customers {
     public Customers(List<Customer> items) {
         this.items = items;
     }
+
+    public List<Customer> getItems() {
+        return items;
+    }
+
 }
