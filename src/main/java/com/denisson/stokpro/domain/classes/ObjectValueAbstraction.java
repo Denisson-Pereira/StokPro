@@ -13,7 +13,7 @@ public abstract class ObjectValueAbstraction {
 
     private void validation(String value) {
         if (!isValid(value)) {
-            throw new IllegalArgumentException(String.format("%s is not valid.", value));
+            throw new IllegalArgumentException(String.format("%s is not valid.", this.getClass().getSimpleName()));
         }
     }
 
